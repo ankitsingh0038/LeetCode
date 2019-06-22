@@ -1,3 +1,11 @@
+#https://leetcode.com/problems/sum-of-root-to-leaf-binary-numbers/
+""" 
+    Time Complexity:O(N)
+    Space Complexity:O(N)
+"""
+
+
+
 # Definition for a binary tree node.
 # class TreeNode:
 #     def __init__(self, x):
@@ -34,5 +42,6 @@ class Solution:
         newRoot = TreeNode(root.val)
         self.makeTree(root,newRoot)
         return self.getAns(newRoot)
+        
         
         
