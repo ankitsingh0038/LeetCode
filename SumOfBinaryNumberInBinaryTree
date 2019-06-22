@@ -45,3 +45,22 @@ class Solution:
         
         
         
+        
+#another solution with optimized space without creating another tree although space complexity will be O(N)
+# which is due to recursion stack.
+
+
+class Solution:
+    def getAns(self,newRoot,a)->int:
+        if newRoot==None:
+            return 0
+        a = newRoot.val+(a<<1)
+        if newRoot.left==None and newRoot.right==None:
+            return a
+        return self.getAns(newRoot.left,a)+self.getAns(newRoot.right,a)
+    def sumRootToLeaf(self, root: TreeNode) -> int:
+        if not root:
+            return 0
+        return self.getAns(root,0)
+        
+        
