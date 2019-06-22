@@ -1,0 +1,38 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def getAns(self,newRoot)->int:
+        if newRoot==None:
+            return 0
+        if newRoot.left==None and newRoot.right==None:
+            return newRoot.val
+        a1 = self.getAns(newRoot.left)
+        a2 = self.getAns(newRoot.right)
+        return a1+a2
+    def makeTree(self,root,newRoot)->int:
+        # This function will create a similar to the given tree but this new tree's Nodes
+        # will contain decimal values corresponding to binary numbers those in the input tree
+        
+        
+        if not root:
+            return
+        if root.left:
+            newRoot.left = TreeNode(newRoot.val*2+root.left.val)
+            self.makeTree(root.left,newRoot.left)
+        if root.right:
+            newRoot.right = TreeNode(newRoot.val*2+root.right.val)
+            self.makeTree(root.right,newRoot.right)
+        return 
+    def sumRootToLeaf(self, root: TreeNode) -> int:
+        if not root:
+            return 0
+        newRoot = TreeNode(root.val)
+        self.makeTree(root,newRoot)
+        return self.getAns(newRoot)
+        
+        
