@@ -1,0 +1,52 @@
+''' 
+   Time Complexity: O(N)
+   Space Complexity: O(N)
+'''
+""" 
+    The basic idea that i have used is that do the level order traversal of the tree with the 
+    help of Queue and then check that every level should have nodes sequence which are pallindrome
+    that's it.
+"""
+
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def palindrome(self,c)->bool:
+        if not c:
+            return True
+        x = 0
+        i = 0
+        n = len(c)-1
+        while i<n:
+            if c[i] and c[n] and c[i].val!=c[n].val:
+                return False
+            if c[i]==None and c[n]!=None:
+                return False
+            if c[n]==None and c[i]!=None:
+                return False
+            i+=1
+            n-=1
+        return True
+    def isSymmetric(self, root: TreeNode) -> bool:
+        if not root:
+            return True
+        checkThis = []
+        checkThis.append(root)
+        checkThis.append('$')
+        while checkThis:
+            a = checkThis.pop(0)
+            if a and a!='$':
+                checkThis.append(a.left)
+                checkThis.append(a.right)
+            if checkThis and checkThis[0]=='$':
+                checkThis.pop(0)
+                checkThis.append('$')
+                if not self.palindrome(checkThis[0:-1]):
+                    return False
+        return True
